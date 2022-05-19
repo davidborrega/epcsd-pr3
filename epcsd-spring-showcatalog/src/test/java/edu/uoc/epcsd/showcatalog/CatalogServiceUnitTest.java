@@ -10,7 +10,6 @@ import edu.uoc.epcsd.showcatalog.domain.service.CatalogServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.jupiter.api.Disabled;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -19,12 +18,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.swing.text.html.Option;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.anyOf;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyLong;
 
 @RunWith(SpringRunner.class)
 public class CatalogServiceUnitTest {
@@ -65,9 +62,9 @@ public class CatalogServiceUnitTest {
         assertThat(catalogService.findShowById(DEFAULT_ID).get().getId()).isEqualTo(getShow().getId());
     }
 
-    @Test
+    @Test(expected = NoSuchElementException.class)
     public void testFindShowByIdNotFound() {
-        assertThat(catalogService.findShowById(DEFAULT_NOT_FOUND_ID).get().getId()).isNotEqualTo(getShow().getId());
+        catalogService.findShowById(DEFAULT_NOT_FOUND_ID).get();
     }
 
     private Category getCategory() {
