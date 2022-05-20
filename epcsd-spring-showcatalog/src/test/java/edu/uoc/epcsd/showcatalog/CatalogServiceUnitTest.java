@@ -10,6 +10,8 @@ import edu.uoc.epcsd.showcatalog.domain.service.CatalogServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -26,24 +28,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 public class CatalogServiceUnitTest {
 
-    @TestConfiguration
-    static class CatalogServiceTestConfig {
-        @Bean
-        public CatalogService catalogService() {
-            return new CatalogServiceImpl();
-        }
-    }
-    @MockBean
+    @Mock
     private CategoryRepository categoryRepository;
 
-    @MockBean
+    @Mock
     private ShowRepository showRepository;
 
-    @MockBean
+    @Mock
     private KafkaTemplate kafkaTemplate;
 
-    @Autowired
-    private CatalogService catalogService;
+    @InjectMocks
+    private CatalogServiceImpl catalogService;
 
     private static Long DEFAULT_ID = 1L;
 

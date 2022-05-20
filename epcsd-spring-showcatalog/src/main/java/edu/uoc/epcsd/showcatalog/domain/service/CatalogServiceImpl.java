@@ -18,18 +18,15 @@ import java.util.Set;
 
 
 @Log4j2
-//@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class CatalogServiceImpl implements CatalogService {
 
-    @Autowired
-    private ShowRepository showRepository;
+    private final ShowRepository showRepository;
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
-    @Autowired
-    private KafkaTemplate<String, Show> kafkaTemplate;
+    private final KafkaTemplate<String, Show> kafkaTemplate;
 
     @Override
     public List<Show> findAllShows() {

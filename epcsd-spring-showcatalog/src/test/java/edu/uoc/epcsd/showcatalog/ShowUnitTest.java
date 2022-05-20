@@ -5,46 +5,36 @@ import edu.uoc.epcsd.showcatalog.domain.Show;
 import edu.uoc.epcsd.showcatalog.domain.Status;
 import edu.uoc.epcsd.showcatalog.domain.repository.CategoryRepository;
 import edu.uoc.epcsd.showcatalog.domain.repository.ShowRepository;
-import edu.uoc.epcsd.showcatalog.domain.service.CatalogService;
 import edu.uoc.epcsd.showcatalog.domain.service.CatalogServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.anyOf;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyLong;
 
 @RunWith(SpringRunner.class)
 public class ShowUnitTest {
 
-    @TestConfiguration
-    static class CatalogServiceTestConfig {
-        @Bean
-        public CatalogService catalogService() {
-            return new CatalogServiceImpl();
-        }
-    }
-    @MockBean
+    @Mock
     private CategoryRepository categoryRepository;
 
-    @MockBean
+    @Mock
     private ShowRepository showRepository;
 
-    @MockBean
+    @Mock
     private KafkaTemplate kafkaTemplate;
 
-    @Autowired
-    private CatalogService catalogService;
+    //@Autowired
+    @InjectMocks
+    private CatalogServiceImpl catalogService;
 
     private static Long DEFAULT_ID = 1L;
 
