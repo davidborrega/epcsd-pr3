@@ -5,7 +5,6 @@ import edu.uoc.epcsd.showcatalog.domain.Category;
 import edu.uoc.epcsd.showcatalog.domain.service.CatalogService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.mockito.internal.verification.VerificationModeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -15,10 +14,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.BDDMockito.given;
@@ -44,7 +41,10 @@ public class CatalogControllerUnitTest {
         given(catalogService.findAllCategories()).willReturn(getCategories());
 
         mvc.perform(get("/categories").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(getCategories().size())))
+                .andExpect(jsonPath("$[0].description", is("Description Category 1")))
+                .andExpect(jsonPath("$[1].description", is("Description Category 2")));
 
         verify(catalogService, VerificationModeFactory.times(1)).findAllCategories();
         reset(catalogService);
