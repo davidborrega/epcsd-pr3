@@ -3,37 +3,16 @@ package edu.uoc.epcsd.showcatalog;
 import edu.uoc.epcsd.showcatalog.domain.Category;
 import edu.uoc.epcsd.showcatalog.domain.Show;
 import edu.uoc.epcsd.showcatalog.domain.Status;
-import edu.uoc.epcsd.showcatalog.domain.repository.CategoryRepository;
-import edu.uoc.epcsd.showcatalog.domain.repository.ShowRepository;
-import edu.uoc.epcsd.showcatalog.domain.service.CatalogServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyLong;
 
 @RunWith(SpringRunner.class)
 public class ShowUnitTest {
-
-    @Mock
-    private CategoryRepository categoryRepository;
-
-    @Mock
-    private ShowRepository showRepository;
-
-    @Mock
-    private KafkaTemplate kafkaTemplate;
-
-    @InjectMocks
-    private CatalogServiceImpl catalogService;
 
     private static Long DEFAULT_ID = 1L;
 
@@ -41,25 +20,21 @@ public class ShowUnitTest {
 
     @Before
     public void setUp() {
-        Show show = getShow();
-        Mockito.when(categoryRepository.findCategoryById(anyLong())).thenReturn(Optional.of(getCategory()));
-        Mockito.when(showRepository.findShowById(anyLong())).thenReturn(Optional.of(show));
-        Mockito.when(showRepository.createShow(show)).thenReturn(show.getId());
+
     }
 
+    @DisplayName("Test show without cancel")
     @Test
     public void testShowWithoutCancelled() {
-        Long showId = catalogService.createShow(getShow());
-        Optional<Show> show = catalogService.findShowById(showId);
-        assertThat(show.get().getStatus()).isNotEqualTo(Status.CANCELLED);
+        assertThat(getShow().getStatus()).isNotEqualTo(Status.CANCELLED);
     }
 
+    @DisplayName("Test show with cancel")
     @Test
     public void testShowWithCancelled() {
-        Long showId = catalogService.createShow(getShow());
-        Optional<Show> show = catalogService.findShowById(showId);
-        catalogService.cancelShow(showId);
-        assertThat(show.get().getStatus()).isEqualTo(Status.CANCELLED);
+        Show show = getShow();
+        show.cancel();
+        assertThat(show.getStatus()).isEqualTo(Status.CANCELLED);
     }
 
     private Category getCategory() {
