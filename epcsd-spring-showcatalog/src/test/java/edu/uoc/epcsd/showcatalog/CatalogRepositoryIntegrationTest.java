@@ -2,6 +2,7 @@ package edu.uoc.epcsd.showcatalog;
 
 import edu.uoc.epcsd.showcatalog.domain.Category;
 import edu.uoc.epcsd.showcatalog.domain.repository.CategoryRepository;
+import edu.uoc.epcsd.showcatalog.infrastructure.repository.jpa.CategoryRepositoryImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class CatalogRepositoryIntegrationTest {
 
-    @Autowired
-    private TestEntityManager testEntityManager;
+    //@Autowired
+    //private TestEntityManager entityManager;
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -31,7 +32,8 @@ public class CatalogRepositoryIntegrationTest {
         category.setId(7L);
         category.setName("Test Category Name");
         category.setDescription("Test Category description");
-        testEntityManager.persistAndFlush(category);
+        categoryRepository.createCategory(category);
+        //entityManager.persistAndFlush(category);
         Optional<Category> categoryReturn = categoryRepository.findCategoryById(7L);
         assertThat(categoryReturn.get().getName()).isEqualTo(category.getName());
     }

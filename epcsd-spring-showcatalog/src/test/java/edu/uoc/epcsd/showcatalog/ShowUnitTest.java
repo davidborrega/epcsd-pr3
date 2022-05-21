@@ -32,7 +32,6 @@ public class ShowUnitTest {
     @Mock
     private KafkaTemplate kafkaTemplate;
 
-    //@Autowired
     @InjectMocks
     private CatalogServiceImpl catalogService;
 
