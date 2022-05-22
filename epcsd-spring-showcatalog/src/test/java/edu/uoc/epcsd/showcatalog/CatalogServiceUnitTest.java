@@ -6,21 +6,22 @@ import edu.uoc.epcsd.showcatalog.domain.Status;
 import edu.uoc.epcsd.showcatalog.domain.repository.CategoryRepository;
 import edu.uoc.epcsd.showcatalog.domain.repository.ShowRepository;
 import edu.uoc.epcsd.showcatalog.domain.service.CatalogServiceImpl;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 public class CatalogServiceUnitTest {
 
     @Mock
@@ -41,7 +42,7 @@ public class CatalogServiceUnitTest {
 
     private static Long DEFAULT_CAPACITY = 100L;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         Mockito.when(categoryRepository.findCategoryById(DEFAULT_ID)).thenReturn(Optional.of(getCategory()));
         Mockito.when(showRepository.findShowById(DEFAULT_ID)).thenReturn(Optional.of(getShow()));
@@ -52,9 +53,11 @@ public class CatalogServiceUnitTest {
         assertThat(catalogService.findShowById(DEFAULT_ID).get().getId()).isEqualTo(getShow().getId());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test()
     public void testFindShowByIdNotFound() {
-        catalogService.findShowById(DEFAULT_NOT_FOUND_ID).get();
+        Assertions.assertThrows(NoSuchElementException.class, () -> {
+            catalogService.findShowById(DEFAULT_NOT_FOUND_ID).get();
+        });
     }
 
     private Category getCategory() {

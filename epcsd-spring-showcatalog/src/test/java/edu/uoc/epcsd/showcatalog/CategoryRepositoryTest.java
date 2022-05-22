@@ -1,7 +1,6 @@
 package edu.uoc.epcsd.showcatalog;
 
 import edu.uoc.epcsd.showcatalog.domain.repository.CategoryRepository;
-import edu.uoc.epcsd.showcatalog.infrastructure.repository.jpa.CategoryRepositoryImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
