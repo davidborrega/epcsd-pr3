@@ -2,7 +2,11 @@ package edu.uoc.epcsd.showcatalog;
 
 import edu.uoc.epcsd.showcatalog.application.rest.CatalogRESTController;
 import edu.uoc.epcsd.showcatalog.domain.Category;
+import edu.uoc.epcsd.showcatalog.domain.repository.CategoryRepository;
+import edu.uoc.epcsd.showcatalog.domain.repository.ShowRepository;
 import edu.uoc.epcsd.showcatalog.domain.service.CatalogService;
+import edu.uoc.epcsd.showcatalog.infrastructure.repository.jpa.SpringDataCategoryRepository;
+import edu.uoc.epcsd.showcatalog.infrastructure.repository.jpa.SpringDataShowRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.internal.verification.VerificationModeFactory;
@@ -24,14 +28,18 @@ import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-
-
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(CatalogRESTController.class)
 public class CatalogControllerUnitTest {
 
     @Autowired
     private MockMvc mvc;
+
+    @MockBean
+    private SpringDataCategoryRepository springDataCategoryRepository;
+
+    @MockBean
+    private SpringDataShowRepository springDataShowRepository;
 
     @MockBean
     private CatalogService catalogService;

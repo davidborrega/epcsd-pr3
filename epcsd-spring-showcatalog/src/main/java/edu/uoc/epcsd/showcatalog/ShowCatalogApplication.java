@@ -5,8 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-//@EnableJpaRepositories
-//@EnableJpaRepositories(basePackages = "edu.uoc.epcsd.showcatalog.infrastructure.repository.jpa")
+@EnableJpaRepositories
 public class ShowCatalogApplication {
 
     public static void main(String[] args) {
