@@ -8,6 +8,7 @@ import edu.uoc.epcsd.showcatalog.domain.repository.ShowRepository;
 import edu.uoc.epcsd.showcatalog.domain.service.CatalogServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -48,11 +49,13 @@ public class CatalogServiceUnitTest {
         Mockito.when(showRepository.findShowById(DEFAULT_ID)).thenReturn(Optional.of(getShow()));
     }
 
+    @DisplayName("Find show with valid id")
     @Test
     public void testFindShowByIdFound() {
         assertThat(catalogService.findShowById(DEFAULT_ID).get().getId()).isEqualTo(getShow().getId());
     }
 
+    @DisplayName("Find show with invalid id")
     @Test()
     public void testFindShowByIdNotFound() {
         Assertions.assertThrows(NoSuchElementException.class, () -> {
