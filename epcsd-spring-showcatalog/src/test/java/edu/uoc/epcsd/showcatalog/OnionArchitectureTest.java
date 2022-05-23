@@ -15,8 +15,7 @@ public class OnionArchitectureTest {
     @ArchTest
     static final ArchRule onion_architecture_is_respected = onionArchitecture()
             .domainModels("edu.uoc.epcsd.showcatalog.domain")
-            .domainServices("edu.uoc.epcsd.showcatalog.domain.service")
-            .check(CLASSES);
+            .domainServices("edu.uoc.epcsd.showcatalog.domain.service");
             //.applicationServices("edu.uoc.epcsd.showcatalog.infrastructure")
             //.adapter("cli", "..adapter.cli..")
             //.adapter("persistence", "edu.uoc.epcsd.showcatalog.infrastructure.repository.jpa")
