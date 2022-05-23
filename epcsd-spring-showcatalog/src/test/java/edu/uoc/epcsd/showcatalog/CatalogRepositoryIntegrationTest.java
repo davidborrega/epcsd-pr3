@@ -10,13 +10,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 @SpringBootTest
 class CatalogRepositoryIntegrationTest {
-
     @Autowired
     private CategoryRepository categoryRepository;
-
     @DisplayName("Create new category in database")
     @Test
     void testGetCategories() {

@@ -75,9 +75,10 @@
             <version>3.22.0</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.tngtech.archunit/archunit -->
         <dependency>
             <groupId>com.tngtech.archunit</groupId>
-            <artifactId>archunit</artifactId>
+            <artifactId>archunit-junit5</artifactId>
             <version>0.23.1</version>
             <scope>test</scope>
         </dependency>
