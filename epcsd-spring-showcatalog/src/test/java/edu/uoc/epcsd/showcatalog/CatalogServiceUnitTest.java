@@ -3,7 +3,6 @@ package edu.uoc.epcsd.showcatalog;
 import edu.uoc.epcsd.showcatalog.domain.Category;
 import edu.uoc.epcsd.showcatalog.domain.Show;
 import edu.uoc.epcsd.showcatalog.domain.Status;
-import edu.uoc.epcsd.showcatalog.domain.repository.CategoryRepository;
 import edu.uoc.epcsd.showcatalog.domain.repository.ShowRepository;
 import edu.uoc.epcsd.showcatalog.domain.service.CatalogServiceImpl;
 import org.junit.jupiter.api.Assertions;
@@ -14,7 +13,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.NoSuchElementException;
@@ -26,13 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CatalogServiceUnitTest {
 
     @Mock
-    private CategoryRepository categoryRepository;
-
-    @Mock
     private ShowRepository showRepository;
-
-    @Mock
-    private KafkaTemplate kafkaTemplate;
 
     @InjectMocks
     private CatalogServiceImpl catalogService;
@@ -45,7 +37,6 @@ public class CatalogServiceUnitTest {
 
     @BeforeEach
     public void setUp() {
-        Mockito.when(categoryRepository.findCategoryById(DEFAULT_ID)).thenReturn(Optional.of(getCategory()));
         Mockito.when(showRepository.findShowById(DEFAULT_ID)).thenReturn(Optional.of(getShow()));
     }
 

@@ -2,8 +2,6 @@ package edu.uoc.epcsd.showcatalog;
 
 import edu.uoc.epcsd.showcatalog.application.rest.CatalogRESTController;
 import edu.uoc.epcsd.showcatalog.domain.Category;
-import edu.uoc.epcsd.showcatalog.domain.repository.CategoryRepository;
-import edu.uoc.epcsd.showcatalog.domain.repository.ShowRepository;
 import edu.uoc.epcsd.showcatalog.domain.service.CatalogService;
 import edu.uoc.epcsd.showcatalog.infrastructure.repository.jpa.SpringDataCategoryRepository;
 import edu.uoc.epcsd.showcatalog.infrastructure.repository.jpa.SpringDataShowRepository;

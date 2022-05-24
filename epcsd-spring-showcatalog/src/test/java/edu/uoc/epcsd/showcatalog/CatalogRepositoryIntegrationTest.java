@@ -18,7 +18,7 @@ class CatalogRepositoryIntegrationTest {
 
     @DisplayName("Create new category in database")
     @Test
-    void testGetCategories() {
+    void testCreateAndGetCategoryById() {
         Category category = new Category();
         category.setId(7L);
         category.setName("Test Category Name");
