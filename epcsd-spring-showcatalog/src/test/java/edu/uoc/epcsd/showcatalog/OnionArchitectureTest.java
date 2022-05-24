@@ -14,10 +14,10 @@ public class OnionArchitectureTest {
 
     @ArchTest
     static final ArchRule onion_architecture_is_respected = onionArchitecture()
-            .domainModels("..domain..")
-            .domainServices("..domain.service..")
-            .applicationServices("..infrastructure..")
+            .domainModels("edu.uoc.epcsd.showcatalog.domain..")
+            .domainServices("edu.uoc.epcsd.showcatalog.domain.service..")
+            .applicationServices("edu.uoc.epcsd.showcatalog.application")
             //.adapter("cli", "..adapter.cli..")
-            .adapter("persistence", "..domain.repository..")
-            .adapter("rest", "..application.rest..");
+            .adapter("persistence", "edu.uoc.epcsd.showcatalog.domain.repository..")
+            .adapter("rest", "edu.uoc.epcsd.showcatalog.application.rest..");
 }
