@@ -1,23 +1,21 @@
 package edu.uoc.epcsd.showcatalog;
 
-import com.tngtech.archunit.core.domain.JavaClasses;
-import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.core.importer.ImportOption;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
 
 import static com.tngtech.archunit.library.Architectures.onionArchitecture;
-
-@AnalyzeClasses(packages = "edu.uoc.epcsd.showcatalog")
+@AnalyzeClasses(packages = "edu.uoc.epcsd.showcatalog", importOptions = ImportOption.DoNotIncludeTests.class)
 public class OnionArchitectureTest {
+
+    private static String APP_PACKAGE = "edu.uoc.epcsd.showcatalog";
 
     @ArchTest
     static final ArchRule onion_architecture_is_respected = onionArchitecture()
-            .domainModels("edu.uoc.epcsd.showcatalog.domain..")
-            .domainServices("edu.uoc.epcsd.showcatalog.domain.service..")
-            .applicationServices("edu.uoc.epcsd.showcatalog.application")
-            //.adapter("cli", "..adapter.cli..")
-            .adapter("persistence", "edu.uoc.epcsd.showcatalog.domain.repository..")
-            .adapter("rest", "edu.uoc.epcsd.showcatalog.application.rest..");
+            .domainModels(APP_PACKAGE + ".domain..")
+            .domainServices(APP_PACKAGE + ".domain.service..")
+            .applicationServices(APP_PACKAGE + ".application..")
+            .adapter("kafka", APP_PACKAGE + ".infrastructure.kafka..")
+            .adapter("persistence", APP_PACKAGE + ".infrastructure.repository.jpa");
 }
